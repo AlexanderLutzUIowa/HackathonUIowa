@@ -34,18 +34,20 @@ def mapMachine(year, month, key):
     print(sortedWords)
     print(sortedWords[0])
 
-def test():
-    i = 1925
+def dataGetter(year, month, iterations = 25, jump_size = 1):
+    i = 0
     key1 = "FLPiXUAqjSQsAzY0gBc2YvXYIGwPWbEy"
     key2 = "kkTOXQGned4gaefoipGgrVnQjclgdhPp"
     key3 = "lXFbtGN6XLAQw8AGvVTMNZ205PmIrxk1"
 
     keys = [key1, key2, key3]
-    while 1 < 2020:
+    while i < iterations:
         mapMachine(str(i), "1", str(keys[i % 3]))
         time.sleep(.0001)
+        year = year + month//12
+        month = month + jump_size
+        month = month % 12
         i = i + 1
-        print(i)
 
 
 
