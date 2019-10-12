@@ -115,6 +115,8 @@ def createGUI():
         if (tkvariableMonth.get() != "Month" and yearEntryBox.get() != ""):
             print(yearEntryBox.get())
 
+
+
     buttonFrame = Frame(rootWindow)
     buttonFrame.columnconfigure(0, weight=1)
     buttonFrame.rowconfigure(3, weight=1)
