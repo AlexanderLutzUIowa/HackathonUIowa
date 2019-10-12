@@ -4,7 +4,7 @@ import json
 import time
 
 
-def mapMachine(year, month, key):
+def dataReader(year, month, key):
     urlBase = "https://api.nytimes.com/svc/archive/v1/" + year + "/" + month + ".json?api-key=" + key
     stringResultFromNYT = urlopen(urlBase).read().decode('utf8')
     jsonResult = json.loads(stringResultFromNYT)
@@ -16,7 +16,6 @@ def mapMachine(year, month, key):
     with open("data_file.json", "w") as write_file:
         json.dump(jsonResult, write_file)
     while i < resultSize:
-        #print(i)
         if ("main") in jsonResult["response"]["docs"][i]["headline"]:
             titles.append(jsonResult["response"]["docs"][i]["headline"]["main"])
         i = i + 1
@@ -42,7 +41,7 @@ def dataGetter(year, month, iterations = 25, jump_size = 1):
 
     keys = [key1, key2, key3]
     while i < iterations:
-        mapMachine(str(i), "1", str(keys[i % 3]))
+        dataReader(str(i), "1", str(keys[i % 3]))
         time.sleep(.0001)
         year = year + month//12
         month = month + jump_size
@@ -50,15 +49,3 @@ def dataGetter(year, month, iterations = 25, jump_size = 1):
         i = i + 1
 
 
-
-
-
-
-
-
-#def testFile(input):
-    #fileStream = open("text.txt", encoding='utf-8')
-    #fileStream.write("hello")
-
-
-test()
