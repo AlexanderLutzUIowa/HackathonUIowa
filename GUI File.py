@@ -7,12 +7,40 @@ def createGUI():
 
     rootWindow = Tk()
     rootWindow.title("News Frequency Tool")
-    topFrame = Frame(rootWindow)
+    entryFrame = Frame(rootWindow)
     rootWindow.geometry('500x200')
-    topFrame.grid(column=0, row=0, sticky=(N, W, E, S))
-    topFrame.columnconfigure(0, weight=1)
-    topFrame.rowconfigure(0, weight=1)
-    topFrame.pack(pady=100, padx=100)
+    entryFrame.columnconfigure(2, weight=1)
+    entryFrame.rowconfigure(2, weight=1)
+
+
+
+
+    titleFrame = Frame(rootWindow)
+    titleFrame.columnconfigure(0, weight=1)
+    titleFrame.rowconfigure(0, weight=1)
+
+
+    instructionsLabel = Label(titleFrame, text="This tool will pull data from the NY Times archive database"
+                                               " and find which word was most \n"
+                                               "frequent in the titles for that given month")
+    instructionsLabel.pack()
+
+
+
+
+
+
+    entryTitleFrame = Frame(rootWindow)
+    entryTitleFrame.columnconfigure(1, weight=1)
+    entryTitleFrame.rowconfigure(1, weight=1)
+
+    monthAndYearLabel = Label(entryTitleFrame, text="Choose a month and enter a year")
+
+    monthAndYearLabel.pack()
+
+
+
+
 
 
     tkvariableMonth = StringVar(rootWindow)
@@ -21,24 +49,27 @@ def createGUI():
                'August', 'September', 'October', 'November', 'December'}
     tkvariableMonth.set('Month')  # set the default option
 
-    popupMenu = OptionMenu(topFrame, tkvariableMonth, *choices)
-    Label(mainframe, text="Choose a dish").grid(row=1, column=1)
+    popupMenu = OptionMenu(entryFrame, tkvariableMonth, *choices)
+
     popupMenu.grid(row=2, column=1)
+
+    yearEntryBox = Entry(entryFrame)
+    yearEntryBox.grid(row = 2, column = 2)
 
     # on change dropdown value
     def change_dropdown(*args):
-        print(tkvar.get())
+        print(tkvariableMonth.get())
 
-    instructionsLabel = Label(rootWindow, text = "This tool will pull data from the NY Times archive database"
-                                                 " and find which word was most \n"
-                                                 "frequent in the titles for that given month")
-    instructionsLabel.pack()
-
+    titleFrame.pack(pady=20, padx=10)
+    entryTitleFrame.pack()
+    entryFrame.pack(pady=10, padx=10)
 
 
 
 
-    rootWindow.geometry('500x200')
+
+
+
 
     rootWindow.mainloop()
 
