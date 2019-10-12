@@ -7,10 +7,33 @@ def createGUI():
 
     rootWindow = Tk()
     rootWindow.title("News Frequency Tool")
+
     entryFrame = Frame(rootWindow)
     rootWindow.geometry('500x200')
     entryFrame.columnconfigure(0, weight=1)
     entryFrame.rowconfigure(2, weight=1)
+
+
+    tkvariableMonth = StringVar(rootWindow)
+
+    choices = {'January', 'February', 'March', 'April', 'May', 'June', 'July',
+               'August', 'September', 'October', 'November', 'December'}
+    tkvariableMonth.set('Month')  # set the default option
+
+    popupMenu = OptionMenu(entryFrame, tkvariableMonth, *choices)
+
+    popupMenu.grid(row=0, column=1)
+
+    yearEntryBox = Entry(entryFrame)
+    yearEntryBox.grid(row=0, column=2)
+
+    def buttonClicked():
+        if (tkvariableMonth.get() == "Month"):
+            print("Choose a valid month")
+        else:
+            print(tkvariableMonth.get())
+
+
 
 
 
@@ -42,7 +65,7 @@ def createGUI():
     buttonFrame.columnconfigure(0, weight=1)
     buttonFrame.rowconfigure(3, weight=1)
 
-    runToolButton = Button(buttonFrame, text= "Run Tool")
+    runToolButton = Button(buttonFrame, text= "Run Tool", command = buttonClicked)
     runToolButton.pack()
 
 
@@ -54,22 +77,7 @@ def createGUI():
 
 
 
-    tkvariableMonth = StringVar(rootWindow)
 
-    choices = {'January', 'February', 'March', 'April', 'May', 'June', 'July',
-               'August', 'September', 'October', 'November', 'December'}
-    tkvariableMonth.set('Month')  # set the default option
-
-    popupMenu = OptionMenu(entryFrame, tkvariableMonth, *choices)
-
-    popupMenu.grid(row=0, column=1)
-
-    yearEntryBox = Entry(entryFrame)
-    yearEntryBox.grid(row = 0, column = 2,)
-
-    # on change dropdown value
-    def change_dropdown(*args):
-        print(tkvariableMonth.get())
 
     titleFrame.pack(pady=20, padx=10)
     entryTitleFrame.pack()
