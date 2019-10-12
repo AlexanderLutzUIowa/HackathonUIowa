@@ -9,7 +9,15 @@ def mapMachine():
     jsonResult = json.loads(stringResultFromNYT)
     with open("data_file.json", "w") as write_file:
         json.dump(jsonResult, write_file)
-    print(jsonResult)
+    resultSize = jsonResult["response"]["meta"]["hits"]
+    i = 0
+    while i < resultSize:
+        print(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
+        print("\n")
+        print(i)
+        i = i + 1
+
+
 
 
 #def testFile(input):
