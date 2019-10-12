@@ -23,7 +23,10 @@ def mapMachine():
                         words[word] = words[word] + 1
                     else:
                         words[word] = 1
-    print(words)
+    sortedWords = sorted(words.items(), key=lambda x: x[1], reverse=True)
+    print(sortedWords)
+    print(sortedWords[0])
+
 
 
 
