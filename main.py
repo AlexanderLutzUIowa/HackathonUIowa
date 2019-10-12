@@ -13,6 +13,9 @@ def mapMachine():
     words = {}
     while i < resultSize:
         titles.append(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
+
+        if ("print_headline") in jsonResult["response"]["docs"][i]["headline"]:
+            titles.append(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
         i = i + 1
 
     for title in titles:
