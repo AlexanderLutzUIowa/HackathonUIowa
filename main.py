@@ -14,7 +14,6 @@ def mapMachine():
     while i < resultSize:
         print(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
         print("\n")
-        print(i)
         i = i + 1
 
 
