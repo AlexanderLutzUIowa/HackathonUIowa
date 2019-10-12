@@ -4,7 +4,7 @@ import json
 
 
 def mapMachine():
-    urlBase = "https://api.nytimes.com/svc/archive/v1/2018/1.json?api-key=FLPiXUAqjSQsAzY0gBc2YvXYIGwPWbEy"
+    urlBase = "https://api.nytimes.com/svc/archive/v1/2016/1.json?api-key=FLPiXUAqjSQsAzY0gBc2YvXYIGwPWbEy"
     stringResultFromNYT = urlopen(urlBase).read().decode('utf8')
     jsonResult = json.loads(stringResultFromNYT)
     resultSize = jsonResult["response"]["meta"]["hits"]
@@ -12,7 +12,6 @@ def mapMachine():
     titles = []
     words = {}
     while i < resultSize:
-
         if ("print_headline") in jsonResult["response"]["docs"][i]["headline"]:
             titles.append(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
         i = i + 1
@@ -20,6 +19,7 @@ def mapMachine():
     for title in titles:
         if title not in ["None", " ", None]:
             for word in title.split():
+                word = word.lower()
                 if word not in ["a"]:
                     if word in words:
                         words[word] = words[word] + 1

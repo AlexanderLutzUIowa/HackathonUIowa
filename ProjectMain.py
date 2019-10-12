@@ -1,12 +1,8 @@
-
-from urllib.request import urlopen, urlretrieve
-import json
+import matplotlib.pyplot as plt
 
 
-def mapMachine():
-    urlBase = "https://api.nytimes.com/svc/archive/v1/2019/1.json?api-key=FLPiXUAqjSQsAzY0gBc2YvXYIGwPWbEy"
-    stringResultFromNYT = urlopen(urlBase).read().decode('utf8')
-    jsonResult = json.loads(stringResultFromNYT)
-    print(jsonResult)
+x = [1,2,3,4,5]
+y = [100,200,300,400,500]
 
-mapMachine()
+plt.bar(x,y)
+plt.show()
