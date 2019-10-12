@@ -11,7 +11,11 @@ def mapMachine():
     i = 0
     titles = []
     words = {}
+    words_to_ignore = ["a"]
+    with open("data_file.json", "w") as write_file:
+        json.dump(jsonResult, write_file)
     while i < resultSize:
+        print(i)
         if ("print_headline") in jsonResult["response"]["docs"][i]["headline"]:
             titles.append(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
         i = i + 1
@@ -20,7 +24,7 @@ def mapMachine():
         if title not in ["None", " ", None]:
             for word in title.split():
                 word = word.lower()
-                if word not in ["a"]:
+                if word not in words_to_ignore:
                     if word in words:
                         words[word] = words[word] + 1
                     else:
