@@ -9,7 +9,7 @@ def createGUI():
     rootWindow.title("News Frequency Tool")
 
     entryFrame = Frame(rootWindow)
-    rootWindow.geometry('500x200')
+    rootWindow.geometry('1000x600')
     entryFrame.columnconfigure(0, weight=1)
     entryFrame.rowconfigure(2, weight=1)
     yearEntryBox = Entry(entryFrame)
