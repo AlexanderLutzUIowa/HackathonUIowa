@@ -19,6 +19,7 @@ def mapMachine():
     for title in titles:
         if title not in ["None", " ", None]:
             for word in title.split():
+                word = word.lower()
                 if word not in ["a"]:
                     if word in words:
                         words[word] = words[word] + 1
