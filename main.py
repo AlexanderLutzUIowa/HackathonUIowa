@@ -1,45 +1,52 @@
 
 from urllib.request import urlopen, urlretrieve
 import json
+import time
 
 
-def mapMachine():
-    urlBase = "https://api.nytimes.com/svc/archive/v1/2016/1.json?api-key=FLPiXUAqjSQsAzY0gBc2YvXYIGwPWbEy"
+def mapMachine(year, month, key):
+    urlBase = "https://api.nytimes.com/svc/archive/v1/" + year + "/" + month + ".json?api-key=" + key
     stringResultFromNYT = urlopen(urlBase).read().decode('utf8')
     jsonResult = json.loads(stringResultFromNYT)
-    with open("data_file.json", "w") as write_file:
-        json.dump(jsonResult, write_file)
     resultSize = jsonResult["response"]["meta"]["hits"]
     i = 0
     titles = []
     words = {}
-    words_to_ignore = ["a"]
+    words_to_ignore = ["his", "was", "a.", "c.", "i", "n.", "first", "plan", "set", "miss", "‐‐", "city","—", "n" , "has", "not", "that", "a", " ", "the", "and", "on", "title", "new", "of", "with", "for", "to", "in", "at", "by", "is", "will", "be", "says", "know", "no", "as", "from", "", "are", "york", "here", "he", "but", "up", "two", "2", "mrs", "u.", "s." , "mrs.", "3", "1", "4", "--", "an", "|", "6", "7", "8", ]
     with open("data_file.json", "w") as write_file:
         json.dump(jsonResult, write_file)
     while i < resultSize:
-        print(i)
-        if ("print_headline") in jsonResult["response"]["docs"][i]["headline"]:
-            titles.append(jsonResult["response"]["docs"][i]["headline"]["print_headline"])
-        i = i+1
-    print(i)
-
-
-    print("result size is ", resultSize)
+        #print(i)
+        if ("main") in jsonResult["response"]["docs"][i]["headline"]:
+            titles.append(jsonResult["response"]["docs"][i]["headline"]["main"])
+        i = i + 1
 
     for title in titles:
         if title not in ["None", " ", None]:
             for word in title.split():
-                word = word.lower()
-                word1 = word.strip("?!'()-:")
-                if word1 not in words_to_ignore:
-                    if word1 in words:
-                        words[word1] = words[word1] + 1
+                word = word.lower().strip(");:{-}[]()!@'#$%^&*?/,<>")
+                if word not in words_to_ignore:
+                    if word in words:
+                        words[word] = words[word] + 1
                     else:
-                        words[word1] = 1
-
+                        words[word] = 1
     sortedWords = sorted(words.items(), key=lambda x: x[1], reverse=True)
     print(sortedWords)
     print(sortedWords[0])
+
+def test():
+    i = 1925
+    key1 = "FLPiXUAqjSQsAzY0gBc2YvXYIGwPWbEy"
+    key2 = "kkTOXQGned4gaefoipGgrVnQjclgdhPp"
+    key3 = "lXFbtGN6XLAQw8AGvVTMNZ205PmIrxk1"
+
+    keys = [key1, key2, key3]
+    while 1 < 2020:
+        mapMachine(str(i), "1", str(keys[i % 3]))
+        time.sleep(.0001)
+        i = i + 1
+        print(i)
+
 
 
 
@@ -52,4 +59,4 @@ def mapMachine():
     #fileStream.write("hello")
 
 
-mapMachine()
+test()
